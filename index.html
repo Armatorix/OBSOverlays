@@ -18,6 +18,9 @@ body {
 .main {
     max-width: 800px;
 }
+footer {
+    padding-top: 2em;
+}
 </style>
 <body>
 
@@ -58,6 +61,14 @@ body {
         })
     }
 
+    copy = () =>{
+        $("#url-input").select();
+        document.execCommand("copy");
+    }
+    openURL = () =>{
+        location.href = $("#url-input").val();
+    }
+
 </script>
     <div class="container main">
         <h2 class="h2">Chess.com stats listener</h2>
@@ -95,14 +106,13 @@ body {
                     <label for="game-type-select">Game type</label>
                 </div>
                 
-                <div class="row">
                     <h6 class="h6 row">
                         Starter stats
                     </h6>
                     <div class="row">
-                        <button type="button" class="btn btn-primary mb-3 col" onclick="loadStatsButton()">Load current</button>
+                        <button type="button" class="btn btn-primary mb-3" onclick="loadStatsButton()">Load current</button>
                     </div>
-                </div>
+
                 <div class="row">
                     <div class="mb-3 form-floating col watched">
                         <input class="form-control" type="number" placeholder="win" id="win-input">
@@ -118,12 +128,26 @@ body {
                     </div>
                 </div>
                 <div class="mb-3 row form-floating">
-                    <input class="form-control" type="text" placeholder="overlay" id="url-input" disabled>
+                    <input class="form-control" type="text" placeholder="overlay" id="url-input">
                     <label for="url-input">LiveStat URL</label>
+                </div>
+
+                <div class="mb-3 row">
+                    <button type="button" class="btn btn-primary mb-3 col border" onclick="copy()">Copy</button>
+                    <button type="button" class="btn btn-primary mb-3 col border" onclick="openURL()">Open</button>
                 </div>
             </form>
         </div>
+        <footer class="row text-center">
+            <div>
+                <a class="text-center" href="https://github.com/Armatorix/OBSOverlays">Open source</a>
+            </div>
+            <div class=>
+                by <a href="https://github.com/Armatorix">Armatorix</a>
+            </div>
+        </footer>
     </div>
+
     </body>
     </html>
     
