@@ -18,37 +18,64 @@ body {
 
 </style>
 <body>
+
+<script>
+    loadStats =(type, player) => {
+        $.getJSON(
+            `https://api.chess.com/pub/player/${player}/stats`,
+            (data) => {
+                var win = parseInt(data[type]["record"]["win"]);
+                var loss= parseInt(data[type]["record"]["loss"]);
+                var draw= parseInt(data[type]["record"]["draw"]);
+                $("#win-input").val(win);
+                $("#loss-input").val(loss);
+                $("#draw-input").val(draw);
+            }
+        );
+    };
+    loadStatsButton =() => {
+        var username = $("#username-input").val();
+        var game_type = $("select#game-type-select").val();
+        console.log(username, game_type)
+        loadStats(game_type, username);
+    };
+
+</script>
     <form class="container">
-        <h5 class="h5">Stats listener</h5>
-        <div class="mb-3 form-floating">
+        <h5 class="h5">Chess.com stats listener</h5>
+        <div class="mb-3 row form-floating">
             <input class="form-control" type="text" placeholder="hikaru" id="username-input">
             <label for="game-type-select">Chess.com username</label>
         </div>
-        <div class="mb-3 form-floating">
+        <div class="mb-3 row form-floating">
             <select class="form-control" aria-label="game-type" id="game-type-select">
-                <option selected>Blitz</option>
+                <option value="chess_blitz">Blitz</option>
                 <option value="chess_daily">Daily</option>
                 <option value="chess960_daily">960 daily</option>
                 <option value="chess_rapid">Rapid</option>
                 <option value="chess_bullet">Bullet</option>
-                <option value="chess_blitz">Blitz</option>
             </select>
             <label for="game-type-select">Game type</label>
         </div>
 
-        <div class="mb-3">
-            Starter values
+        <div class="row">
+            <h6 class="h6 row">
+                Starter values
+            </h6>
+            <div class="row">
+                <button type="button" class="btn btn-primary mb-3 col" onclick="loadStatsButton()">Load current</button>
+            </div>
         </div>
         <div class="row">
-            <div class="mb-1 form-floating col-sm">
+            <div class="mb-3 form-floating col">
                 <input class="form-control" type="number" placeholder="win" id="win-input">
                 <label for="win-input">Win</label>
             </div>
-            <div class="mb-1 form-floating col-sm">
+            <div class="mb-3 form-floating col">
                 <input class="form-control" type="number" placeholder="win" id="draw-input">
                 <label for="draw-input">Draw</label>
             </div>
-            <div class="mb-1 form-floating col-sm">
+            <div class="mb-3 form-floating col">
                 <input class="form-control" type="number" placeholder="loss" id="loss-input">
                 <label for="Loss-input">Loss</label>
             </div>
