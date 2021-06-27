@@ -22,6 +22,15 @@ body {
 <body>
 
 <script>
+    updateURL = () => {
+        var username = $("#username-input").val();
+        var game_type = $("select#game-type-select").val();
+        var win = $("#win-input").val();
+        var loss = $("#loss-input").val();
+        var draw = $("#draw-input").val();
+        $("#url-input").val(`${window.location.href}chesscom-stats.html?username=${username}&type=${game_type}&start_win=${win}&start_draw=${draw}&start_loss=${loss}`);
+    }
+
     loadStats =(type, player) => {
         $.getJSON(
             `https://api.chess.com/pub/player/${player}/stats`,
@@ -32,16 +41,22 @@ body {
                 $("#win-input").val(win);
                 $("#loss-input").val(loss);
                 $("#draw-input").val(draw);
+                updateURL();
             }
         );
     };
     loadStatsButton =() => {
         var username = $("#username-input").val();
         var game_type = $("select#game-type-select").val();
-        console.log(username, game_type)
         loadStats(game_type, username);
     };
 
+    window.onload = () => {
+        $(".watched").change(()=>{
+            console.log("wtf");
+            updateURL();
+        })
+    }
 
 </script>
     <div class="container main">
@@ -66,11 +81,11 @@ body {
                     Base data
                 </h6>
                 <div class="mb-3 row form-floating">
-                    <input class="form-control" type="text" placeholder="hikaru" id="username-input">
+                    <input class="form-control watched" type="text" placeholder="hikaru" id="username-input">
                     <label for="username-input">Chess.com username</label>
                 </div>
                 <div class="mb-3 row form-floating">
-                    <select class="form-control" aria-label="game-type" id="game-type-select">
+                    <select class="form-control watched" aria-label="game-type" id="game-type-select">
                         <option value="chess_blitz">Blitz</option>
                         <option value="chess_daily">Daily</option>
                         <option value="chess960_daily">960 daily</option>
@@ -89,15 +104,15 @@ body {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="mb-3 form-floating col">
+                    <div class="mb-3 form-floating col watched">
                         <input class="form-control" type="number" placeholder="win" id="win-input">
                         <label for="win-input">Win</label>
                     </div>
-                    <div class="mb-3 form-floating col">
+                    <div class="mb-3 form-floating col watched">
                         <input class="form-control" type="number" placeholder="win" id="draw-input">
                         <label for="draw-input">Draw</label>
                     </div>
-                    <div class="mb-3 form-floating col">
+                    <div class="mb-3 form-floating col watched">
                         <input class="form-control" type="number" placeholder="loss" id="loss-input">
                         <label for="loss-input">Loss</label>
                     </div>

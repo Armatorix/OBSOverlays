@@ -16,9 +16,9 @@
 </style>
 <body>
 <script>
-    loadStats =(type, player, start_win,start_loss,start_draw) => {
+    loadStats =(type, username, start_win,start_loss,start_draw) => {
         $.getJSON(
-            `https://api.chess.com/pub/player/${player}/stats`,
+            `https://api.chess.com/pub/player/${username}/stats`,
             (data) => {
                 var win = parseInt(data[type]["record"]["win"]);
                 var loss= parseInt(data[type]["record"]["loss"]);
@@ -34,13 +34,13 @@
         var url = new URL(window.location.href)
         var params = url.searchParams
         var type = params.get("type")
-        var player = params.get("player")
+        var username = params.get("username")
         var start_win = parseInt(params.get("start_win"));
         var start_loss = parseInt(params.get("start_loss"));
         var start_draw = parseInt(params.get("start_draw"));
-        loadStats(type, player, start_win, start_loss, start_draw);
+        loadStats(type, username, start_win, start_loss, start_draw);
         setInterval(function(){
-            loadStats(type, player, start_win, start_loss, start_draw);
+            loadStats(type, username, start_win, start_loss, start_draw);
         }, 3000);
 }   
 </script>
