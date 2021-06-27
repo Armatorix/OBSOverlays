@@ -15,7 +15,9 @@
 body {
     padding-top: 2em;
 }
-
+.main {
+    max-width: 800px;
+}
 </style>
 <body>
 
@@ -40,46 +42,73 @@ body {
         loadStats(game_type, username);
     };
 
-</script>
-    <form class="container">
-        <h5 class="h5">Chess.com stats listener</h5>
-        <div class="mb-3 row form-floating">
-            <input class="form-control" type="text" placeholder="hikaru" id="username-input">
-            <label for="game-type-select">Chess.com username</label>
-        </div>
-        <div class="mb-3 row form-floating">
-            <select class="form-control" aria-label="game-type" id="game-type-select">
-                <option value="chess_blitz">Blitz</option>
-                <option value="chess_daily">Daily</option>
-                <option value="chess960_daily">960 daily</option>
-                <option value="chess_rapid">Rapid</option>
-                <option value="chess_bullet">Bullet</option>
-            </select>
-            <label for="game-type-select">Game type</label>
-        </div>
 
-        <div class="row">
-            <h6 class="h6 row">
-                Starter values
-            </h6>
-            <div class="row">
-                <button type="button" class="btn btn-primary mb-3 col" onclick="loadStatsButton()">Load current</button>
-            </div>
+</script>
+    <div class="container main">
+        <h2 class="h2">Chess.com stats listener</h2>
+
+        <div class="container mb-3">
+            <h5 class="h5">Why?</h5>
+            Design for usage as OBS overlay.
         </div>
-        <div class="row">
-            <div class="mb-3 form-floating col">
-                <input class="form-control" type="number" placeholder="win" id="win-input">
-                <label for="win-input">Win</label>
-            </div>
-            <div class="mb-3 form-floating col">
-                <input class="form-control" type="number" placeholder="win" id="draw-input">
-                <label for="draw-input">Draw</label>
-            </div>
-            <div class="mb-3 form-floating col">
-                <input class="form-control" type="number" placeholder="loss" id="loss-input">
-                <label for="Loss-input">Loss</label>
-            </div>
+        <div class="container mb-3">
+            <h5 class="h5">How to use?</h5>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Put your chess.com username</li>
+                <li class="list-group-item">Load your current stats with the "Load current" button OR put your values manually</li>
+                <li class="list-group-item">Use the generated URL to watch live your stats</li>
+              </ol>
         </div>
-    </form>
-</body>
-</html>
+        <div class="container mb-3">
+            <form class="container">
+                <h5 class="h5">Generator</h5>
+                <h6 class="h6 row">
+                    Base data
+                </h6>
+                <div class="mb-3 row form-floating">
+                    <input class="form-control" type="text" placeholder="hikaru" id="username-input">
+                    <label for="username-input">Chess.com username</label>
+                </div>
+                <div class="mb-3 row form-floating">
+                    <select class="form-control" aria-label="game-type" id="game-type-select">
+                        <option value="chess_blitz">Blitz</option>
+                        <option value="chess_daily">Daily</option>
+                        <option value="chess960_daily">960 daily</option>
+                        <option value="chess_rapid">Rapid</option>
+                        <option value="chess_bullet">Bullet</option>
+                    </select>
+                    <label for="game-type-select">Game type</label>
+                </div>
+                
+                <div class="row">
+                    <h6 class="h6 row">
+                        Starter stats
+                    </h6>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary mb-3 col" onclick="loadStatsButton()">Load current</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 form-floating col">
+                        <input class="form-control" type="number" placeholder="win" id="win-input">
+                        <label for="win-input">Win</label>
+                    </div>
+                    <div class="mb-3 form-floating col">
+                        <input class="form-control" type="number" placeholder="win" id="draw-input">
+                        <label for="draw-input">Draw</label>
+                    </div>
+                    <div class="mb-3 form-floating col">
+                        <input class="form-control" type="number" placeholder="loss" id="loss-input">
+                        <label for="loss-input">Loss</label>
+                    </div>
+                </div>
+                <div class="mb-3 row form-floating">
+                    <input class="form-control" type="text" placeholder="overlay" id="url-input" disabled>
+                    <label for="url-input">LiveStat URL</label>
+                </div>
+            </form>
+        </div>
+    </div>
+    </body>
+    </html>
+    
